@@ -113,9 +113,9 @@ class Booking(webdriver.Chrome):
         search_button.click()
 
 
-    def apply_filters(self):
+    def apply_filters(self, star_rating):
         filters = BookingFilter(driver=self)
-        filters.apply_star_rating(3,4)
+        filters.apply_star_rating(*star_rating)
         time.sleep(const.WAIT_SECONDS)
 
         filters.sort_price_lowest_first()

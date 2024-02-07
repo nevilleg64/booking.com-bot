@@ -8,6 +8,9 @@ def get_args():
     parser.add_argument("-i", "--check_in", type=str, help="Check-in date (YYY-MM-DD)", required=True)
     parser.add_argument("-o", "--check_out", type=str, help="Check-out date (YYY-MM-DD)", required=True)
     parser.add_argument("-n", "--nr_adults", type=int, help="Number of adults", required=False, default=1)
+    parser.add_argument("-s", "--star_rating", type=int, nargs="+", 
+                        help="Number of stars e.g. (multiple values can be separated by a space)", 
+                        required=False, default=[3,4])
     args = vars(parser.parse_args())
     return args
 
@@ -22,7 +25,7 @@ def main():
         bot.select_dates(args["check_in"], args["check_out"])
         bot.select_adults(args["nr_adults"])
         bot.click_search()
-        bot.apply_filters() # works in Debug mode, but not otherwise
+        bot.apply_filters(args["star_rating"]) # works in Debug mode, but not otherwise
         bot.report_results()
         print('Exiting...')
 
